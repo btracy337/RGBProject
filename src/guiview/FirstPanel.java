@@ -27,13 +27,13 @@ public class FirstPanel extends JPanel
 
 		myButton = new JButton("Change Color");
 		myLabel = new JLabel("RGB Slider Application");
-		redLabel = new JLabel("Red: ");
-		greenLabel = new JLabel("Green: " );
-		blueLabel = new JLabel("Blue: " );
-		
 		redSlider = new JSlider(1,255);
 		greenSlider = new JSlider(1,255);
 		blueSlider = new JSlider(1,255);
+		redLabel = new JLabel("Red: " + redSlider.getValue());
+		greenLabel = new JLabel("Green: " + greenSlider.getValue());
+		blueLabel = new JLabel("Blue: " + blueSlider.getValue());
+
 		appLayout = new SpringLayout();
 
 
@@ -104,5 +104,6 @@ public class FirstPanel extends JPanel
 			}
 	
 		});
+
 }
 }
