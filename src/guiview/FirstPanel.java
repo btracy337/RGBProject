@@ -1,6 +1,10 @@
 package guiview;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.AncestorListener;
+
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -27,20 +31,15 @@ public class FirstPanel extends JPanel
 
 		myButton = new JButton("Change Color");
 		myLabel = new JLabel("RGB Slider Application");
-		redSlider = new JSlider(1,255);
-		greenSlider = new JSlider(1,255);
-		blueSlider = new JSlider(1,255);
+		redSlider = new JSlider(1, 255);
+		greenSlider = new JSlider(1, 255);
+		blueSlider = new JSlider(1, 255);
+
 		redLabel = new JLabel("Red: " + redSlider.getValue());
 		greenLabel = new JLabel("Green: " + greenSlider.getValue());
 		blueLabel = new JLabel("Blue: " + blueSlider.getValue());
 
 		appLayout = new SpringLayout();
-
-
-
-
-	
-
 
 		setupPanel();
 		setupLayout();
@@ -59,21 +58,19 @@ public class FirstPanel extends JPanel
 		this.add(blueSlider);
 		this.add(greenSlider);
 		this.setLayout(appLayout);
-		
 
 	}
-	
+
 	private void changeColor()
 	{
-		int red = (int)(redSlider.getValue());
-		int blue = (int)(blueSlider.getValue());
-		int green = (int)(greenSlider.getValue());
-		
+		int red = (int) (redSlider.getValue());
+		int blue = (int) (blueSlider.getValue());
+		int green = (int) (greenSlider.getValue());
+
 		this.setBackground(new Color(red, green, blue));
-		
-		
+
 	}
-	
+
 	private void setupLayout()
 	{
 		appLayout.putConstraint(SpringLayout.EAST, myLabel, -338, SpringLayout.EAST, this);
@@ -97,13 +94,35 @@ public class FirstPanel extends JPanel
 
 	private void setupListeners()
 	{
-		myButton.addActionListener(new ActionListener() {
+		myButton.addActionListener(new ActionListener()
+		{
 			public void actionPerformed(ActionEvent mouseClick)
 			{
 				changeColor();
-			}
-	
-		});
 
-}
+			}
+
+		});
+		redSlider.addChangeListener(new ChangeListener()
+		{
+			public void stateChanged(ChangeEvent event)
+			{
+				redLabel.setText("Red: " + redSlider.getValue());
+			}
+		});
+		greenSlider.addChangeListener(new ChangeListener()
+		{
+			public void stateChanged(ChangeEvent event)
+			{
+				greenLabel.setText("Green: " + greenSlider.getValue());
+			}
+		});
+		blueSlider.addChangeListener(new ChangeListener()
+		{
+			public void stateChanged(ChangeEvent event)
+			{
+				blueLabel.setText("Blue: " + blueSlider.getValue());
+			}
+		});
+	}
 }
